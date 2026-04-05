@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>upload thesis</title>
+</head>
+
+<body>
+  <h2>Create Thesis and Upload Document</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset>
+      <legend>Thesis Info</legend>
+      {{ thesis_form }}
+    </fieldset>
+    <fieldset>
+      <legend>Proposal Upload</legend>
+      {{ doc_form2 }}
+    </fieldset>
+    <fieldset>
+      <legend>Report Upload</legend>
+      {{ doc_form1 }}
+    </fieldset>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+
+</html>

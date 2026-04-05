@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,6 +25,10 @@ SECRET_KEY = 'django-insecure-wej+t0m!%fjqkf^j^7@)uf1!te+!^dr6lc87206q-kq^17z90w
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+LOGIN_URL="/student/login/"
+
+MEDIA_URL = '/docs/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'docs')
 
 ALLOWED_HOSTS = []
 

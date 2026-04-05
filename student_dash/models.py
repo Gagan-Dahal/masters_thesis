@@ -1,3 +1,34 @@
 from django.db import models
+from django.conf import settings
 
-# Create your models here.
+class Thesis(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='student_thesis')
+    supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='supervisor_thesis')
+    # evaluator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    research_area = models.CharField(max_length=255)
+    submission_date = models.DateField(auto_now_add=True)
+    STATUS_CHOICES = [
+        ('DRAFT', 'Draft'),
+        ('SUBMITTED', 'Submitted'),
+        ('APPROVED', 'Approved'),
+    ]
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='DRAFT'
+    )
+
+class Document(models.Model):
+    thesis = models.ForeignKey(Thesis,on_delete=models.CASCADE)
+    upload_date = models.DateField(auto_now_add=True)
+    file = models.FileField(upload_to='docs/')
+    DOC_TYPE = [
+        ('REPORT', 'Report'),
+        ('PROPOSAL', 'Proposal'),
+    ]
+    doc_type = models.CharField(
+        max_length=20,
+        choices=DOC_TYPE,
+        default='REPORT'
+    )
