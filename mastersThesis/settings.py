@@ -28,7 +28,7 @@ DEBUG = True
 LOGIN_URL="/student/login/"
 
 MEDIA_URL = '/docs/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'docs')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ALLOWED_HOSTS = []
 

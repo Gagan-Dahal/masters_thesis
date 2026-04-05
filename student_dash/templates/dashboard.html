@@ -20,6 +20,16 @@
       <h2>Thesis: {{thesis.title}} </h2>
       <h3>Research Area: {{thesis.research_area}}</h3>
       <p><strong>Status:</strong> {{thesis.status}}</p>
+        {% for d in doc %}
+        <p><strong>{{d.doc_type}}:</strong> <a href="{{ d.file.url }}">{{d.file.name}}</a></p>
+        {% endfor %}
+
+      <p>
+          Supervisor Comment/Review Section
+        </p>
+        <a href="">submit for supervisor review</a><br>
+        <a href="">add revised report</a><br>
+        <a href="">submit for evaluation</a>
     </div>
     {% else %}
       <p>Please Upload Thesis</p>

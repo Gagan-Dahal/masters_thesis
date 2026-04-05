@@ -55,8 +55,11 @@ def login_view(request):
 def dashboard(request):
     user = request.user
     thesis = user.student_thesis.first()
+    document = thesis.document_set.all() if thesis is not None else None
+    print(document)
     context = {
-        'thesis': thesis
+        'thesis': thesis,
+        'doc':document 
     }
     return render(request,'dashboard.html',context)
 
