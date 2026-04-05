@@ -40,9 +40,9 @@ class Instructor(models.Model):
 class Department(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, unique = True)
-    head_id = models.ForeignKey(Instructor, on_delete=models.CASCADE)
-    deputy1_id = models.ForeignKey(Instructor, on_delete=models.CASCADE)
-    deputy2_id = models.ForeignKey(Instructor, on_delete=models.CASCADE)
+    head_id = models.ForeignKey(Instructor, on_delete=models.CASCADE, related_name='head_department')
+    deputy1_id = models.ForeignKey(Instructor, on_delete=models.CASCADE, related_name='deputy1_department')
+    deputy2_id = models.ForeignKey(Instructor, on_delete=models.CASCADE, related_name='deputy2_department')
     def __str__(self):
         return self.name
 
