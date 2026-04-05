@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>All Thesis</h2>
+<table class="table">
+<tr>
+    <th>Title</th>
+    <th>Student</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+{% for thesis in theses %}
+<tr>
+<td>{{ thesis.title }}</td>
+<td>{{ thesis.student.name }}</td>
+<td>{{ thesis.status }}</td>
+<td>
+<a href="{% url 'thesis_detail' thesis.id %}"
+class="btn btn-primary">
+View
+</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
