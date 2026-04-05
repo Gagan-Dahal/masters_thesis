@@ -7,7 +7,7 @@ from .models import Evaluation
 def thesis_list(request):
     theses = Thesis.objects.all()
     return render(request,
-                  'evaluator_dash/thesis_list.html',
+                  'thesis_list.html',
                   {'theses': theses}
                   )
 
@@ -16,7 +16,7 @@ def thesis_detail(request, id):
     thesis = get_object_or_404(Thesis, id=id)
     evaluations = Evaluation.objects.filter(thesis=thesis)
     return render(request,
-                  'evaluator_dash/thesis_detail.html',
+                  'thesis_detail.html',
                   {
                       'thesis': thesis,
                       'evaluations': evaluations
@@ -36,7 +36,7 @@ def evaluate_thesis(request, id):
             evaluation.save()
             return redirect('thesis_detail', id=id)
     return render(request,
-                  'evaluator_dash/evaluate.html',
+                  'evaluate.html',
                   {
                       'form': form,
                       'thesis': thesis
