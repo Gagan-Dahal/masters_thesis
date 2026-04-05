@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 <h2>Thesis Detail</h2>
-
 <p><b>Title:</b> {{ thesis.title }}</p>
-
 <p><b>Research Area:</b> {{ thesis.research_area }}</p>
-
 <p><b>Student:</b> {{ thesis.student.name }}</p>
-
 <p><b>Status:</b> {{ thesis.status }}</p>
 
 <a href="{% url 'evaluate_thesis' thesis.id %}"
@@ -18,27 +13,20 @@ Evaluate
 </a>
 
 <hr>
-
 <h3>Evaluation History</h3>
-
 {% for e in evaluations %}
 
 <div class="card">
-
 <p>
 <b>Status:</b> {{ e.status }}
 </p>
-
 <p>
 <b>Comment:</b> {{ e.comment }}
 </p>
-
 <p>
 <b>Date:</b> {{ e.evaluation_date }}
 </p>
-
 </div>
 
 {% endfor %}
-
 {% endblock %}
