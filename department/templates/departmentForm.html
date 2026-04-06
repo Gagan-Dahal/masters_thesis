@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Department Registration{% endblock %}
+
+{% block content %}
+<h2>Department Registration</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.as_p }}
+    <button type="submit">Save Department</button>
+</form>
+{% endblock %}

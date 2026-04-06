@@ -1,0 +1,53 @@
+h2 {
+    color: #1f3c88;
+}
+
+form p {
+    margin-bottom: 12px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+button, .btn {
+    background: #1f3c88;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover {
+    background: #162f6b;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th {
+    background: #1f3c88;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 8px;
+}
+
+.errorlist {
+    color: red;
+    list-style: none;
+    padding: 0;
+}

@@ -32,8 +32,8 @@ class Instructor(models.Model):
     ]
     post = models.CharField(max_length = 19, choices=post_choices)
     qualification = models.CharField(max_length=255)
-    contact_number = models.CharField(14)
-    email = models.CharField(255)
+    contact_number = models.CharField(max_length=14)
+    email = models.CharField(max_length=255)
     def __str__(self):
         return self.name
 

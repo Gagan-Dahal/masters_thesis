@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Homepage{% endblock %}
+{% block additional_nav_elements %}
+    <li><a href="{% url 'student_list' %}">Students</a></li>
+
+{% endblock %}
+{% block content %}
+<h1>This is the Homepage</h1>
+{% endblock %}

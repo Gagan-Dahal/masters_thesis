@@ -12,12 +12,20 @@
     <header>
         <nav>
             <ul>
-                <li>Home</li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 <li>About Us</li>
                 <li>Login</li>
+                {% block additional_nav_elements %}{% endblock %}
             </ul>
         </nav>
     </header>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
     {% block content %}
     {% endblock %}
 </body>

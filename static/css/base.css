@@ -20,3 +20,59 @@ header nav ul{
     box-sizing: border-box;
     padding-right: 20px;
 }
+
+header nav ul li a{
+    color: white;
+    text-decoration: none;
+}
+
+header nav ul li a:hover{
+    color: rgb(200, 200, 255);
+}
+
+input[type="submit"]{
+    background-color: rgb(189, 239, 245);
+    border: none;
+    border-radius: 5px;
+}
+input[type="submit"]:hover{
+    background-color: rgb(89, 160, 218);
+}
+input[type="submit"]:active{
+    transform: scale(0.9);
+}
+
+.right_push{
+    margin-left: auto;
+}
+.messages {
+    list-style: none;
+    width:fit-content;
+    height: fit-content;
+    padding: 5px;
+}
+
+.error{
+    background-color: rgb(237, 80, 45);
+    border: 1px dashed black;
+    border-radius: 7px;
+    padding: 5px;
+}
+.success{
+    border: 1px dashed black;
+    background-color: rgb(61, 216, 131);
+    border-radius: 7px;
+    padding: 5px;
+}
+
+.errorlist{
+    list-style: none;
+    width:fit-content;
+    height: fit-content;
+}
+.errorlist li{
+    background-color: rgb(237, 80, 45);
+    border: 1px dashed black;
+    border-radius: 7px;
+    padding: 5px;
+}
