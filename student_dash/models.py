@@ -1,10 +1,11 @@
 from django.db import models
 from django.conf import settings
+from evaluator_dash.models import EvaluationCommittee
 
 class Thesis(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='student_thesis')
     supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name='supervisor_thesis')
-    # evaluator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    evaluation_committee_id = models.ForeignKey(EvaluationCommittee, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     research_area = models.CharField(max_length=255)
     submission_date = models.DateField(auto_now_add=True)
