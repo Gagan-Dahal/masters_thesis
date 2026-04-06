@@ -8,16 +8,6 @@ class Thesis(models.Model):
     title = models.CharField(max_length=255)
     research_area = models.CharField(max_length=255)
     submission_date = models.DateField(auto_now_add=True)
-    STATUS_CHOICES = [
-        ('DRAFT', 'Draft'),
-        ('SUBMITTED', 'Submitted'),
-        ('APPROVED', 'Approved'),
-    ]
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default='DRAFT'
-    )
 
 class Document(models.Model):
     thesis = models.ForeignKey(Thesis,on_delete=models.CASCADE)

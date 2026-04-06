@@ -1,8 +1,30 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from .forms import DocumentForm, RegisterForm, ThesisForm, User
+
+from evaluator_dash.models import Evaluation
+from .forms import DocumentForm, ThesisForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.contrib import messages
+
+@login_required
+def addrevised(request):
+    if request.method == 'POST':
+        thesis = request.user.student_thesis.first()
+        doc_form = DocumentForm(request.POST, request.FILES)
+        if  doc_form.is_valid():
+            doc = doc_form.save(commit=False)
+            doc.thesis = thesis
+            doc.doc_type="Report"
+            doc.save()
+            return redirect('sdashboard')
+    else:
+        doc_form = DocumentForm()
+    return render(request, 'addrevised.html', {
+        'doc_form': doc_form
+    })    
 
 @login_required
 def upload(request):
@@ -35,40 +57,20 @@ def upload(request):
         'doc_form2': doc_form2
     })    
 
-@login_required
-def logout_view(request):
-    logout(request)
-    return redirect('login')
-
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user) 
-            return redirect('/department/')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
-
-@login_required
-def dashboard(request):
-    user = request.user
-    thesis = user.student_thesis.first()
-    document = thesis.document_set.all() if thesis is not None else None
-    context = {
-        'thesis': thesis,
-        'doc':document 
-    }
-    return render(request,'dashboard.html',context)
-
-def register_view(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()   # creates user
-            return redirect('login')
-    else:
-        form = RegisterForm()
-
-    return render(request, 'register.html', {'form': form})
+class StdDashboardView(LoginRequiredMixin, UserPassesTestMixin,View):
+    def test_func(self):
+        return hasattr(self.request.user, 'student')
+    def handle_no_permission(self):
+        messages.error(self.request, "You are not authorized to access this page.")
+        return redirect('home')
+    def get(self,request):
+        user = request.user
+        thesis = user.student_thesis.first()
+        document = thesis.document_set.all() if thesis is not None else None
+        evaluation = Evaluation.objects.filter(thesis=thesis).first()
+        context = {
+            'thesis': thesis,
+            'doc':document,
+            'eval':evaluation
+        }
+        return render(request,'dashboard.html',context)

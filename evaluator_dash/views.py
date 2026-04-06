@@ -23,27 +23,6 @@ def thesis_detail(request, id):
                       'evaluations': evaluations
                   })
   
-# evaluate thesis
-# def evaluate_thesis(request, id):
-#     thesis = get_object_or_404(Thesis, id=id)
-#     form = EvaluationForm()
-#     if request.method == "POST":
-#         form = EvaluationForm(request.POST)
-#         if form.is_valid():
-#             evaluation = form.save(commit=False)
-#             evaluation.thesis = thesis
-#             # temporary evaluator (can replace with logged user later)
-#             evaluation.evaluator_id = 1
-#             evaluation.save()
-#             return redirect('thesis_detail', id=id)
-#     return render(request,
-#                   'evaluate.html',
-#                   {
-#                       'form': form,
-#                       'thesis': thesis
-#                   })
-
-
 def evaluate_thesis(request, id):
 
     thesis = get_object_or_404(Thesis, id=id)
