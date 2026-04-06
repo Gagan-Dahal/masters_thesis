@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-wej+t0m!%fjqkf^j^7@)uf1!te+!^dr6lc87206q-kq^17z90w
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOGIN_URL="/student/login/"
+LOGIN_URL="/department/login/"
 
 MEDIA_URL = '/docs/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

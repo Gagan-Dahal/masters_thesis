@@ -56,7 +56,6 @@ def dashboard(request):
     user = request.user
     thesis = user.student_thesis.first()
     document = thesis.document_set.all() if thesis is not None else None
-    print(document)
     context = {
         'thesis': thesis,
         'doc':document 
