@@ -13,8 +13,7 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li>About Us</li>
-                <li>Login</li>
+                <li><a href="{% url 'login' %}">Login</a></li>
                 {% block additional_nav_elements %}{% endblock %}
             </ul>
         </nav>

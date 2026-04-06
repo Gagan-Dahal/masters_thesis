@@ -3,6 +3,8 @@ from django.views import View
 from .forms import StudentRegistrationForm, InstructorRegistrationForm, DepartmentRegistrationForm, CourseRegistrationForm
 from django.contrib import messages
 from .models import Student, Instructor, Department, Course
+from django.contrib.auth import authenticate, login, logout
+
 
 
 # Create your views here.
@@ -107,3 +109,26 @@ class ListCourse(View):
             "courses": courses
         }
         return render(request, "courseList.html", context_dict)
+    
+
+
+class UserLogin(View):
+    def get(self, request):
+        next_url = request.GET.get('next')
+        return render(request, "login.html", {'next': next})
+    def post(self, request):
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        next_url = request.POST.get('next')
+
+        user = authenticate(username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Logged in Successfully")
+            if next_url:
+                return redirect(next_url)
+            return redirect('home')
+        
+        messages.error(request, "Credentials Do Not Match")
+        return render(request, "login.html", {'username': username, 'next': next_url})
