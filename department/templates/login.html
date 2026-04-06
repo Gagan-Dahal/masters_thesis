@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title %}User Login{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'login.css' %}">{% endblock %}
+
+{% block inner_content %}
+<div class="login_card">
+    <h1>User Login</h1>
+    <form method="post" class="login_form">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" value="{{ username|default:''}}">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <br>
+        <input type="submit" value="Log in" id="submit">
+    </form>
+</div>
+{% endblock %}
