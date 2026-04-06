@@ -4,15 +4,18 @@ from .forms import StudentRegistrationForm, InstructorRegistrationForm, Departme
 from django.contrib import messages
 from .models import Student, Instructor, Department, Course
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 
 # Create your views here.
-class HomeView(View):
+class HomeView(LoginRequiredMixin, View):
     def get(self, request):
         return render(request, 'home.html')
     
-class AddStudent(View):
+class AddStudent(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.is_staff
 
     def get(self, request):
         empty_form = StudentRegistrationForm()
@@ -27,7 +30,7 @@ class AddStudent(View):
         messages.error(request, "Failed to add product")
         return render(request, "studentForm.html", {"form":form})
     
-class ListStudents(View):
+class ListStudents(LoginRequiredMixin, View):
 
     def get(self, request):
         students = Student.objects.all()
@@ -36,7 +39,9 @@ class ListStudents(View):
         }
         return render(request, "studentList.html", context_dict)
     
-class AddInstructor(View):
+class AddInstructor(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.is_staff
 
     def get(self, request):
         empty_form = InstructorRegistrationForm()
@@ -51,7 +56,7 @@ class AddInstructor(View):
         messages.error(request, "Failed to add instructor")
         return render(request, "instructorForm.html", {"form":form})
     
-class ListInstructors(View):
+class ListInstructors(LoginRequiredMixin, View):
 
     def get(self, request):
         instructors = Instructor.objects.all()
@@ -61,7 +66,9 @@ class ListInstructors(View):
         return render(request, "instructorList.html", context_dict)
     
 
-class AddDepartment(View):
+class AddDepartment(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.is_staff
 
     def get(self, request):
         empty_form = DepartmentRegistrationForm()
@@ -76,7 +83,7 @@ class AddDepartment(View):
         messages.error(request, "Failed to add department")
         return render(request, "departmentForm.html", {"form":form})
     
-class ListDepartments(View):
+class ListDepartments(LoginRequiredMixin, View):
 
     def get(self, request):
         departments = Department.objects.all()
@@ -85,7 +92,9 @@ class ListDepartments(View):
         }
         return render(request, "departmentList.html", context_dict)
 
-class AddCourse(View):
+class AddCourse(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return self.request.user.is_staff
 
     def get(self, request):
         empty_form = CourseRegistrationForm()
@@ -101,7 +110,7 @@ class AddCourse(View):
         return render(request, "courseForm.html", {"form":form})
     
 
-class ListCourse(View):
+class ListCourse(LoginRequiredMixin, View):
 
     def get(self, request):
         courses = Course.objects.all()
@@ -132,3 +141,8 @@ class UserLogin(View):
         
         messages.error(request, "Credentials Do Not Match")
         return render(request, "login.html", {'username': username, 'next': next_url})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')

@@ -10,7 +10,9 @@
 {% block inner_content %}
 <h2>Student List</h2>
 
+{% if user.is_staff %}
 <a href="{% url 'student_form' %}" class="btn">Add Student</a>
+{% endif %}
 
 <table>
     <thead>
