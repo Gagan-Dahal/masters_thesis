@@ -13,10 +13,10 @@ def addrevised(request):
     if request.method == 'POST':
         thesis = request.user.student_thesis.first()
         doc_form = DocumentForm(request.POST, request.FILES)
-        if  doc_form.is_valid():
+        if doc_form.is_valid():
             doc = doc_form.save(commit=False)
             doc.thesis = thesis
-            doc.doc_type="Report"
+            doc.doc_type = 'REPORT'
             doc.save()
             return redirect('sdashboard')
     else:
@@ -38,12 +38,12 @@ def upload(request):
 
             doc = doc_form1.save(commit=False)
             doc.thesis = thesis
-            doc.doc_type="Report"
+            doc.doc_type = 'REPORT'
             doc.save()
 
             doc = doc_form2.save(commit=False)
             doc.thesis = thesis
-            doc.doc_type="Proposal"
+            doc.doc_type = 'PROPOSAL'
             doc.save()
             return redirect('sdashboard')
     else:

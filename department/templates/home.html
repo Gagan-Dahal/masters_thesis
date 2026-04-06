@@ -6,9 +6,12 @@
     <li><a href="{% url 'instructor_list' %}">Instructors</a></li>
     <li><a href="{% url 'department_list' %}">Departments</a></li>
     <li><a href="{% url 'course_list' %}">Courses</a></li>
+    <li><a href="{% url 'thesis_list' %}">Thesis Section</a></li>
+    <li><a href="{% url 'sdashboard' %}">Students Dashboard</a></li>
 {% endblock %}
 {% block content %}
 {% block inner_content %}
 <h1>This is the Homepage</h1>
+<img src="{% static 'relational.png' %}" alt="Relational Diagram" />
 {% endblock %}
 {% endblock %}

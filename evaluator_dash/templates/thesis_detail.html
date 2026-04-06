@@ -7,6 +7,22 @@
 <p><b>Student:</b> {{ thesis.user.student.name }}</p>
 <p><b>Status:</b> {{ thesis.status }}</p>
 
+{% if documents %}
+<hr>
+<h3>Uploaded Documents</h3>
+<ul>
+    {% for doc in documents %}
+    <li>
+        <strong>{{ doc.get_doc_type_display }}:</strong>
+        <a href="{{ doc.file.url }}" target="_blank">Download</a>
+        <span>({{ doc.upload_date }})</span>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p><em>No submitted proposal or report files found yet.</em></p>
+{% endif %}
+
 <a href="{% url 'evaluate_thesis' thesis.id %}"
 class="btn btn-success">
 Evaluate

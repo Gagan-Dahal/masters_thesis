@@ -8,11 +8,12 @@ class Evaluation(models.Model):
         ('Approved', 'Approved'),
         ('Revision', 'Need Revision'),
     ]
-    thesis = models.OneToOneField('student_dash.Thesis', on_delete=models.CASCADE)
-    evaluator = models.OneToOneField(Instructor, on_delete=models.CASCADE)
+    thesis = models.ForeignKey('student_dash.Thesis', on_delete=models.CASCADE)
+    evaluator = models.ForeignKey(Instructor, on_delete=models.CASCADE)
     comment = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     evaluation_date = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return self.thesis.title
     

@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.conf import settings
 
@@ -8,6 +9,11 @@ class Thesis(models.Model):
     title = models.CharField(max_length=255)
     research_area = models.CharField(max_length=255)
     submission_date = models.DateField(auto_now_add=True)
+
+    @property
+    def status(self):
+        latest_evaluation = self.evaluation_set.order_by('-evaluation_date').first()
+        return latest_evaluation.status if latest_evaluation else 'Pending'
 
 class Document(models.Model):
     thesis = models.ForeignKey(Thesis,on_delete=models.CASCADE)

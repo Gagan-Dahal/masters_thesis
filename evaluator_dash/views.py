@@ -7,6 +7,7 @@ from department.models import Instructor
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 class InstDashboardView(LoginRequiredMixin, UserPassesTestMixin,View):
@@ -23,25 +24,21 @@ class InstDashboardView(LoginRequiredMixin, UserPassesTestMixin,View):
                   )
 
 
-# list of theses
-def thesis_list(request):
-    theses = Thesis.objects.all()
-    return render(request,
-                  'thesis_list.html',
-                  {'theses': theses}
-                  )
 
-# thesis details
+@login_required
 def thesis_detail(request, id):
     thesis = get_object_or_404(Thesis, id=id)
     evaluations = Evaluation.objects.filter(thesis=thesis)
+    documents = thesis.document_set.all()
     return render(request,
                   'thesis_detail.html',
                   {
                       'thesis': thesis,
-                      'evaluations': evaluations
+                      'evaluations': evaluations,
+                      'documents': documents,
                   })
   
+@login_required  
 def evaluate_thesis(request, id):
 
     thesis = get_object_or_404(Thesis, id=id)
