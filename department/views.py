@@ -20,7 +20,7 @@ class AddStudent(View):
         form = StudentRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Product Added successfully")
+            messages.success(request, "Student Added Successfully")
             return redirect("home")
         messages.error(request, "Failed to add product")
         return render(request, "studentForm.html", {"form":form})
@@ -33,3 +33,77 @@ class ListStudents(View):
             "students": students
         }
         return render(request, "studentList.html", context_dict)
+    
+class AddInstructor(View):
+
+    def get(self, request):
+        empty_form = InstructorRegistrationForm()
+        return render(request, 'instructorForm.html', {"form": empty_form})
+    def post(self, request):
+        print(request.POST)
+        form = InstructorRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Instructor Added successfully")
+            return redirect("home")
+        messages.error(request, "Failed to add instructor")
+        return render(request, "instructorForm.html", {"form":form})
+    
+class ListInstructors(View):
+
+    def get(self, request):
+        instructors = Instructor.objects.all()
+        context_dict = {
+            "instructors": instructors
+        }
+        return render(request, "instructorList.html", context_dict)
+    
+
+class AddDepartment(View):
+
+    def get(self, request):
+        empty_form = DepartmentRegistrationForm()
+        return render(request, 'departmentForm.html', {"form": empty_form})
+    def post(self, request):
+        print(request.POST)
+        form = DepartmentRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Department Added successfully")
+            return redirect("home")
+        messages.error(request, "Failed to add department")
+        return render(request, "departmentForm.html", {"form":form})
+    
+class ListDepartments(View):
+
+    def get(self, request):
+        departments = Department.objects.all()
+        context_dict = {
+            "departments": departments
+        }
+        return render(request, "departmentList.html", context_dict)
+
+class AddCourse(View):
+
+    def get(self, request):
+        empty_form = CourseRegistrationForm()
+        return render(request, 'courseForm.html', {"form": empty_form})
+    def post(self, request):
+        print(request.POST)
+        form = CourseRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Course Added successfully")
+            return redirect("home")
+        messages.error(request, "Failed to add course")
+        return render(request, "courseForm.html", {"form":form})
+    
+
+class ListCourse(View):
+
+    def get(self, request):
+        courses = Course.objects.all()
+        context_dict = {
+            "courses": courses
+        }
+        return render(request, "courseList.html", context_dict)

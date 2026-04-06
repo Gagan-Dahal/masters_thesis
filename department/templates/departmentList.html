@@ -1,11 +1,22 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Department List{% endblock %}
+{% block additional_nav_elements %}
+    <li><a href="{% url 'student_list' %}">Students</a></li>
+    <li><a href="{% url 'instructor_list' %}">Instructors</a></li>
+    <li><a href="{% url 'department_list' %}">Departments</a></li>
+    <li><a href="{% url 'course_list' %}">Courses</a></li>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'list.css' %}">
+{% endblock %}
 
 {% block content %}
 <h2>Department List</h2>
 
-<a href="{% url 'department_create' %}" class="btn">Add Department</a>
+<a href="{% url 'department_form' %}" class="btn">Add Department</a>
 
 <table>
     <thead>

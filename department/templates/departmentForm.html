@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
 {% block title %}Department Registration{% endblock %}
+{% block additional_nav_elements %}
+    <li><a href="{% url 'student_list' %}">Students</a></li>
+    <li><a href="{% url 'instructor_list' %}">Instructors</a></li>
+    <li><a href="{% url 'department_list' %}">Departments</a></li>
+    <li><a href="{% url 'course_list' %}">Courses</a></li>
+{% endblock %}
 
 {% block content %}
 <h2>Department Registration</h2>
