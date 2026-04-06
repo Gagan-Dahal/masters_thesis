@@ -4,7 +4,7 @@
 <h2>Thesis Detail</h2>
 <p><b>Title:</b> {{ thesis.title }}</p>
 <p><b>Research Area:</b> {{ thesis.research_area }}</p>
-<p><b>Student:</b> {{ thesis.student.name }}</p>
+<p><b>Student:</b> {{ thesis.user.student.name }}</p>
 <p><b>Status:</b> {{ thesis.status }}</p>
 
 <a href="{% url 'evaluate_thesis' thesis.id %}"

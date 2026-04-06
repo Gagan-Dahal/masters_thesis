@@ -12,7 +12,7 @@
 {% for thesis in theses %}
 <tr>
 <td>{{ thesis.title }}</td>
-<td>{{ thesis.student.name }}</td>
+<td>{{ thesis.user.student }}</td>
 <td>{{ thesis.status }}</td>
 <td>
 <a href="{% url 'thesis_detail' thesis.id %}"
