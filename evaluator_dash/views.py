@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from student_dash.models import Thesis
 from .forms import EvaluationForm
 from .models import Evaluation
+from department.models import Instructor
 
 # list of theses
 def thesis_list(request):
@@ -23,18 +24,51 @@ def thesis_detail(request, id):
                   })
   
 # evaluate thesis
+# def evaluate_thesis(request, id):
+#     thesis = get_object_or_404(Thesis, id=id)
+#     form = EvaluationForm()
+#     if request.method == "POST":
+#         form = EvaluationForm(request.POST)
+#         if form.is_valid():
+#             evaluation = form.save(commit=False)
+#             evaluation.thesis = thesis
+#             # temporary evaluator (can replace with logged user later)
+#             evaluation.evaluator_id = 1
+#             evaluation.save()
+#             return redirect('thesis_detail', id=id)
+#     return render(request,
+#                   'evaluate.html',
+#                   {
+#                       'form': form,
+#                       'thesis': thesis
+#                   })
+
+
 def evaluate_thesis(request, id):
+
     thesis = get_object_or_404(Thesis, id=id)
+
     form = EvaluationForm()
+
     if request.method == "POST":
+
         form = EvaluationForm(request.POST)
+
         if form.is_valid():
+
             evaluation = form.save(commit=False)
+
             evaluation.thesis = thesis
-            # temporary evaluator (can replace with logged user later)
-            evaluation.evaluator_id = 1
+
+            # auto select first instructor
+            evaluator = Instructor.objects.first()
+            print(evaluator)
+            evaluation.evaluator = evaluator
+
             evaluation.save()
+
             return redirect('thesis_detail', id=id)
+
     return render(request,
                   'evaluate.html',
                   {
