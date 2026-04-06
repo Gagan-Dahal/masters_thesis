@@ -1,6 +1,5 @@
 from django.db import models
 from department.models import Instructor
-from student_dash.models import Thesis
 from django.conf import settings
 
 
@@ -9,7 +8,7 @@ class Evaluation(models.Model):
         ('Approved', 'Approved'),
         ('Revision', 'Need Revision'),
     ]
-    thesis = models.OneToOneField(Thesis, on_delete=models.CASCADE)
+    thesis = models.OneToOneField('student_dash.Thesis', on_delete=models.CASCADE)
     evaluator = models.OneToOneField(Instructor, on_delete=models.CASCADE)
     comment = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
@@ -30,6 +29,6 @@ class EvaluationCommittee(models.Model):
     external_member_id = models.ForeignKey(ExternalEvaluator, on_delete=models.CASCADE, related_name='external_member')
 
 class ThesisEvaluation(models.Model):
-    thesis_id = models.ForeignKey(Thesis, on_delete=models.CASCADE)
+    thesis_id = models.ForeignKey('student_dash.Thesis', on_delete=models.CASCADE)
     committee_id = models.ForeignKey(EvaluationCommittee, on_delete=models.CASCADE)
 

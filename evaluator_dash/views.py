@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from httpx import request
+from django.http import request
 from student_dash.models import Thesis
 from .forms import EvaluationForm
 from .models import Evaluation

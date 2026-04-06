@@ -1,6 +1,5 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-
 from evaluator_dash.models import Evaluation
 from .forms import DocumentForm, ThesisForm
 from django.contrib.auth import login, logout
