@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 # Create your views here.
-class HomeView(LoginRequiredMixin, View):
+class HomeView(View):
     def get(self, request):
         return render(request, 'home.html')
     
@@ -30,7 +30,7 @@ class AddStudent(LoginRequiredMixin, UserPassesTestMixin, View):
         messages.error(request, "Failed to add product")
         return render(request, "studentForm.html", {"form":form})
     
-class ListStudents(LoginRequiredMixin, View):
+class ListStudents(View):
 
     def get(self, request):
         students = Student.objects.all()
@@ -56,7 +56,7 @@ class AddInstructor(LoginRequiredMixin, UserPassesTestMixin, View):
         messages.error(request, "Failed to add instructor")
         return render(request, "instructorForm.html", {"form":form})
     
-class ListInstructors(LoginRequiredMixin, View):
+class ListInstructors(View):
 
     def get(self, request):
         instructors = Instructor.objects.all()
@@ -83,7 +83,7 @@ class AddDepartment(LoginRequiredMixin, UserPassesTestMixin, View):
         messages.error(request, "Failed to add department")
         return render(request, "departmentForm.html", {"form":form})
     
-class ListDepartments(LoginRequiredMixin, View):
+class ListDepartments(View):
 
     def get(self, request):
         departments = Department.objects.all()
